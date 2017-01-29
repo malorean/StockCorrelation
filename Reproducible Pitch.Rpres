@@ -1,0 +1,53 @@
+Reproducible Pitch
+========================================================
+author: Mathias Keip
+date: 29.01.2017
+autosize: true
+
+What is this about ?  
+========================================================  
+  
+* Final course project for  
+  Coursera MOOC **Developing** **Data** **Products**
+* Build a small shiny app.  
+  Host it: <https://malorean.shinyapps.io/StockCorrelation/>
+* Host the code on git hub: <https://github.com/malorean/StockCorrelation>
+* Make a small presentation about it: You are looking at it. :) 
+* Topic for the application is chooseable.
+
+A closer look at the correlation of stocks
+========================================================
+
+Correlation describes the relationshop between two random variables.  
+The correlation can be calculated using the expected values and standar deviations:  
+![](formula1.svg)
+
+In the case of stocks, if we only look at a limited windows of the time series, we can 
+calculate the correlations for this windows.   
+If we slide this windows day for day, we have a rolling correlation.
+
+A small example
+========================================================
+
+```{r, echo=TRUE}
+library(zoo)
+
+v1 <- c(1, 2, 3, 4, 5)
+v2 <- c(1, 2, 3, 2, 1)
+
+cor(v1, v2)
+rollapply(data.frame(v1,v2), 
+          2 ,
+          function(x) cor(x[,1],x[,2]), 
+          by.column=FALSE)
+
+```
+
+Resources
+========================================================
+
+Stack Overflow Entry: <http://stackoverflow.com/questions/20690809/calculate-rolling-correlation-using-rollapply>  
+Another Example: <http://nakisa.org/rolling-regression-and-rolling-correlation/>  
+Wikipedia article about Correlation and Dependency: <https://en.wikipedia.org/wiki/Correlation_and_dependence>  
+
+# And finally ... thank you!
